@@ -19,47 +19,39 @@
 		    </div>
 			</div>
 		</nav>
-		<div>
-			<div class="bg-white rounded-lg p-6">
-			    <img class="h-16 w-16 md:h-24 md:w-24 rounded-full mx-auto md:mx-0 md:mr-6" :src="profileavatar_url">
-			    <div class="text-center md:text-left">
-			      <h2 class="text-lg">Erin Lindford</h2>
-			      <div class="text-purple-500">Customer Support</div>
-			      <div class="text-gray-600">erinlindford@example.com</div>
-			      <div class="text-gray-600">(555) 765-4321</div>
-			    </div>
-			  </div>
-		</div>
-		{{ profile }} {{ getprofile() }}
+		<Profileinfo :user="user"/>
 	</div>
 </div>
 </template>
 
 <script>
 import GitHub from "github-api";
+import Profileinfo from "~/components/Profileinfo";
 const gh = new GitHub();
 export default {
+	components:{
+		Profileinfo
+	},
 	data () {
 	    return { 
 	    	user: [],
-	    	profile:[]
 	    }
 	},
 	asyncData: ({ req }) => ({
-    	user: gh.getUser('jualahmed')
+    	user: gh.getUser('Synchro')
   	}),
   	methods:{
-  		async getprofile(){
-  			var self = this;
-  			console.log(this.user);
-	  		var profile = (await this.user.getProfile()).data;
-	  		console.log(profile);
-	  		self.profile=profile
-	      	// repos = (await user.listRepos({ type: "owner" })).data.map(i => ({
-	      	//   ...i,
-	      	//   languageColor: langColors[i.language]
-	      	// }));
-  		}
+  		// async getprofile(){
+  		// 	var self = this;
+  		// 	console.log(this.user);
+	  	// 	var profile = (await this.user.getProfile()).data;
+	  	// 	console.log(profile);
+	  	// 	self.profile=profile
+	   //    	// repos = (await user.listRepos({ type: "owner" })).data.map(i => ({
+	   //    	//   ...i,
+	   //    	//   languageColor: langColors[i.language]
+	   //    	// }));
+  		// }
   	}
 };
 </script>
